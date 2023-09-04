@@ -74,3 +74,30 @@
 .modal button:hover {
   background-color: #218838;
 }
+/* Estilos para el botón de verificación */
+.check-button {
+  background-color: #ea02ff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.check-button:hover {
+  background-color: #ffffff;
+}
+
+/* Estilos para el cuadro de entrada de texto */
+.text-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Agregar un poco de margen inferior para separar el cuadro de entrada del botón */
+.text-input + .check-button {
+  margin-top: 10px;
+}
