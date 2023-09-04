@@ -76,7 +76,7 @@
 }
 /* Estilos para el botón de verificación */
 .check-button {
-  background-color: #ea02ff;
+  background-color: #99ff77;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -86,7 +86,7 @@
 }
 
 .check-button:hover {
-  background-color: #ffffff;
+  background-color: #99ff77b6;
 }
 
 /* Estilos para el cuadro de entrada de texto */

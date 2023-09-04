@@ -37,12 +37,12 @@ const preguntas = [
     explicacion: 'ya que no es un gas de efecto invernadero',
     porcentaje: 60
   },
-  // {
-  //   pregunta: 'Complete la siguiente serie de numeros: 2020,2023,2027,2032, * , 2044,2051',
-  //   respuestaCorrecta: 2038,
-  //   explicacion:'Si no se para el cambio climatico para 2038 el mundo va a explotar',
-  //   porcentaje: 70
-  // },
+  {
+    pregunta: 'Complete la siguiente serie de numeros: 2020,2023,2027,2032, * , 2044,2051',
+    respuestaCorrecta: '2038',
+    explicacion:'Si no se para el cambio climatico para 2038 el mundo va a explotar',
+    porcentaje: 70
+  },
   {
     pregunta: 'Cual de los siguientes nombres no pertenece a la lista',
     opciones: ['Benjanim Baker ', 'Catherine Clark', 'Daniel Davis', 'Greta Thunberg'],
@@ -121,14 +121,14 @@ class App extends Component {
         });
       }
     } else {
-      // Si no tiene opciones, se considera correcta si la respuesta del usuario no está vacía
-      const respuestaCorrectaSeleccionada = respuestaUsuario.trim() !== "";
-  
+      // Para respuestas de texto libre
+      const respuestaCorrectaSeleccionada = respuestaUsuario.trim().toLowerCase() === respuestaCorrecta.trim().toLowerCase();
+    
       this.setState({
         respuestaCorrecta: respuestaCorrectaSeleccionada,
         showModal: true,
       });
-  
+    
       if (respuestaCorrectaSeleccionada) {
         this.siguientePregunta();
       }
