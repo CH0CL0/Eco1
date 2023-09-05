@@ -89,15 +89,40 @@
   background-color: #99ff77b6;
 }
 
-/* Estilos para el cuadro de entrada de texto */
-.text-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
 
 /* Agregar un poco de margen inferior para separar el cuadro de entrada del botón */
 .text-input + .check-button {
   margin-top: 10px;
+}
+/* Estilo para el contenedor principal de la aplicación */
+.App {
+  text-align: center;
+}
+
+/* Estilo para el encabezado (título) */
+.App-header {
+  
+  color: white; /* Cambia el color del texto a tu elección */
+  padding: 20px;
+}
+
+/* Estilo para el título */
+h1 {
+  font-size: 36px; /* Cambia el tamaño de fuente a tu elección */
+  margin-bottom: 20px;
+}
+
+/* Estilo para el botón "Jugar" */
+.start-button {
+  background-color: #4caf50; /* Cambia el color de fondo del botón a tu elección */
+  color: white; /* Cambia el color del texto del botón a tu elección */
+  font-size: 24px; /* Cambia el tamaño de fuente del botón a tu elección */
+  padding: 10px 20px; /* Ajusta el relleno del botón según sea necesario */
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* Agrega bordes redondeados al botón */
+}
+
+.start-button:hover {
+  background-color: #45a049; /* Cambia el color de fondo cuando se coloca el cursor sobre el botón */
 }
