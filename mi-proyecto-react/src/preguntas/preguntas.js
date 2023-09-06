@@ -27,7 +27,7 @@ const preguntas = [
     porcentaje: 40
   },
   {
-    pregunta: 'Cual de las siguientes palabras no encaja en la siguiente seire:',
+    pregunta: 'Cual de las siguientes palabras no encaja en la siguiente serie:',
     opciones: ['Desolacion', 'Insolar', 'Consolador', 'Invernadero'],
     respuestaCorrecta: 'Invernadero',
     explicacion: 'Invernadero es la unica palabra que no tiene sol dentro de la palabra (poner mas info del sol)',
