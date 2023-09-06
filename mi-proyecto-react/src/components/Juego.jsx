@@ -1,78 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../App.css';
 import preguntas from '../preguntas/preguntas';
-import { Link, Outlet } from "react-router-dom";
+//import { Link, Outlet } from "react-router-dom";
+ 
 const Juego = () => {
   const [preguntasRestantes, setPreguntasRestantes] = useState([...preguntas]);
   const [preguntaActual, setPreguntaActual] = useState(null);
   const [respuestaUsuario, setRespuestaUsuario] = useState("");
   const [respuestaCorrecta, setRespuestaCorrecta] = useState(false);
   const [opcionesSeleccionadas, setOpcionesSeleccionadas] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [juegoIniciado, setJuegoIniciado] = useState(false);
+  const [showModalCorrecto, setShowModalCorrecto] = useState(false);
+  const [porcentajeAlcanzado, setPorcentajeAlcanzado] = useState(0);
+  
+  const seleccionarSiguientePregunta = () => {
+    const preguntasOrdenadas = [...preguntasRestantes].sort(
+      (a, b) => Math.abs(a.porcentaje - porcentaje) - Math.abs(b.porcentaje - porcentaje)
+    );
 
-  const siguientePregunta = () => {
-    if (preguntasRestantes.length > 0) {
-      const preguntaActual = preguntasRestantes.shift();
-      setPreguntaActual(preguntaActual);
-      setRespuestaUsuario("");
-      setRespuestaCorrecta(false);
-      setOpcionesSeleccionadas([]);
-      setShowModal(false);
-    } else {
-      console.log("No hay más preguntas disponibles.");
-    }
+    const preguntaActual = preguntasOrdenadas.shift();
+    setPorcentajeAlcanzado(preguntaActual.porcentaje);
+    setPreguntaActual(preguntaActual);
+    setRespuestaUsuario("");
+    setRespuestaCorrecta(false);
+    setOpcionesSeleccionadas([]);
+    setPreguntasRestantes(preguntasOrdenadas);
+    setShowModalCorrecto(false);
   };
+  useEffect(() => {
+    if (preguntasRestantes.length > 0) {
+      seleccionarSiguientePregunta();
+    }
+  }, [preguntasRestantes, seleccionarSiguientePregunta]);
+
 
   const checkAnswer = () => {
-    const { respuestaCorrecta, opciones } = preguntaActual;
+  const { respuestaCorrecta, opciones } = preguntaActual;
 
-    let juegoReiniciado = false; // Variable para verificar si el juego se ha reiniciado
+  if (opciones && opciones.length > 0) {
+    const alMenosUnaOpcionSeleccionada = opcionesSeleccionadas.some(
+      (seleccionada) => seleccionada
+    );
 
-    if (opciones && opciones.length > 0) {
-      const alMenosUnaOpcionSeleccionada = opcionesSeleccionadas.some(
-        (seleccionada) => seleccionada
+    if (alMenosUnaOpcionSeleccionada) {
+      const opcionesCorrectas = opciones.map(
+        (opcion) => opcion.trim().toLowerCase() === respuestaCorrecta.trim().toLowerCase()
       );
+      const respuestasCorrectas = opcionesSeleccionadas.every(
+        (seleccionada, index) => seleccionada === opcionesCorrectas[index]
+      );
+      setRespuestaCorrecta(respuestasCorrectas);
 
-      if (alMenosUnaOpcionSeleccionada) {
-        const opcionesCorrectas = opciones.map(
-          (opcion) => opcion.trim().toLowerCase() === respuestaCorrecta.trim().toLowerCase()
-        );
-        const respuestasCorrectas = opcionesSeleccionadas.every(
-          (seleccionada, index) => seleccionada === opcionesCorrectas[index]
-        );
-        setRespuestaCorrecta(respuestasCorrectas);
-        setShowModal(true);
-
-        if (respuestasCorrectas) {
-          siguientePregunta();
-        } else {
-          // Si la respuesta es incorrecta, marcamos el juego como reiniciado
-          juegoReiniciado = true;
-        }
-      } else {
-        setRespuestaCorrecta(false);
-        setShowModal(true);
+      if (respuestasCorrectas) {
+        setShowModalCorrecto(true);
       }
     } else {
-      const respuestaCorrectaSeleccionada =
-        respuestaUsuario.trim().toLowerCase() === respuestaCorrecta.trim().toLowerCase();
-      setRespuestaCorrecta(respuestaCorrectaSeleccionada);
-      setShowModal(true);
-
-      if (respuestaCorrectaSeleccionada) {
-        siguientePregunta();
-      } else {
-        // Si la respuesta es incorrecta, marcamos el juego como reiniciado
-        juegoReiniciado = true;
-      }
+      setRespuestaCorrecta(false);
     }
+  } else {
+    const respuestaCorrectaSeleccionada =
+      respuestaUsuario.trim().toLowerCase() === respuestaCorrecta.trim().toLowerCase();
+    setRespuestaCorrecta(respuestaCorrectaSeleccionada);
 
-    // Verificamos si el juego se ha reiniciado y, en ese caso, volvemos a la pantalla de inicio
-    if (juegoReiniciado) {
-      
+    if (respuestaCorrectaSeleccionada) {
+      setShowModalCorrecto(true);
     }
-  };
+  }
+};
 
   const handleInputChange = (event) => {
     setRespuestaUsuario(event.target.value);
@@ -82,11 +75,6 @@ const Juego = () => {
     const nuevasOpcionesSeleccionadas = [...opcionesSeleccionadas];
     nuevasOpcionesSeleccionadas[index] = !nuevasOpcionesSeleccionadas[index];
     setOpcionesSeleccionadas(nuevasOpcionesSeleccionadas);
-  };
-
-  const iniciarJuego = () => {
-    setJuegoIniciado(true);
-    siguientePregunta(); 
   };
 
   return (
@@ -119,10 +107,10 @@ const Juego = () => {
             <button className="check-button" onClick={checkAnswer}>Verificar Respuestas</button>
           </div>
         )}
-        {showModal && (
+        {showModalCorrecto && (
           <div className="modal">
-            <p>{respuestaCorrecta ? "¡Genial! Lograste responder todas las preguntas con éxito" : "¡Incorrecto!"}</p>
-            <button onClick={iniciarJuego}>Volver al inicio</button>
+            <p>"¡Genial! Lograste responder correctamente"</p>
+            <button onClick={seleccionarSiguientePregunta}>Siguiente Pregunta</button>
           </div>
         )}
       </header>
