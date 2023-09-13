@@ -19,29 +19,31 @@ const Juego = () => {
   };
 
   const seleccionarSiguientePregunta = () => {
-    console.log("el boton anda")
     const preguntasOrdenadas = [...preguntasRestantes].sort(
       (a, b) => Math.abs(a.porcentaje - preguntaActual?.porcentaje) - Math.abs(b.porcentaje - preguntaActual?.porcentaje)
     );
 
+    console.log('Llega aunque incorrecta')
     const siguientePregunta = preguntasOrdenadas.shift();
+    console.log(preguntasOrdenadas)
 
-    if (siguientePregunta) {
-      setPorcentajeAlcanzado(siguientePregunta.porcentaje);
+      console.log("siguiente pregunta")
+      // setPorcentajeAlcanzado(siguientePregunta.porcentaje);
       setPreguntaActual(siguientePregunta);
       setRespuestaUsuario("");
       setRespuestaCorrecta(false);
       setOpcionesSeleccionadas([]);
       setPreguntasRestantes(preguntasOrdenadas);
       setShowModalCorrecto(false);
-    }
+      console.log(showModalCorrecto)
   };
 
   useEffect(() => {
     if (preguntasRestantes.length > 0) {
       seleccionarSiguientePregunta();
     }
-  }, [preguntasRestantes, seleccionarSiguientePregunta]);
+  }, 
+  []);
 
 
   const checkAnswer = () => {
@@ -96,9 +98,9 @@ const Juego = () => {
   return (
     <div className="App">
       <header className="App-header">
-      {preguntaActual && ( 
-  <div>
-    <p>{preguntaActual.pregunta}</p>
+        {preguntaActual ? (
+          <div>
+            <p>{preguntaActual.pregunta}</p>
             {preguntaActual.opciones && preguntaActual.opciones.length > 0 ? (
               <div className="options">{preguntaActual.opciones.map((opcion, index) => (
                 <button
@@ -112,6 +114,7 @@ const Juego = () => {
               </div>
             ) : (
               <div>
+                {/* ?? */}
                 <input
                   type="text"
                   value={respuestaUsuario}
@@ -120,7 +123,18 @@ const Juego = () => {
                 />
               </div>
             )}
-            <button className="check-button" onClick={checkAnswer}>Verificar Respuestas</button>
+            <button className="check-button" onClick={checkAnswer}>
+              Verificar Respuestas
+            </button>
+          </div>
+        ) : (
+          <div>
+            <p>
+              ¡Genial, lograste responder todas las preguntas con éxito! Se nota que sabes mucho acerca del cambio climático.
+            </p>
+            <Link className="link-inicio" to="/">
+              Volver al inicio
+            </Link>
           </div>
         )}
 
@@ -131,10 +145,10 @@ const Juego = () => {
           </div>
         )}
 
-{showModalCorrecto && !respuestaCorrecta && (
+        {showModalCorrecto && !respuestaCorrecta && (
           <div className="modal">
             <p>{showModalCorrecto}</p>
-            <Link className="link-inicio" to="/"> Volver al inicio</Link>
+            <Link className="link-inicio" to="/">Volver al inicio</Link>
           </div>
         )}
       </header>

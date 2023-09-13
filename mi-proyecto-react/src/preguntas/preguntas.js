@@ -3,7 +3,7 @@ const preguntas = [
     pregunta: "El mayor impacto en la biodiversidad por cambio climático es: ",
     respuestaCorrecta: "Extinción",
     explicacion: "El cambio climático provoca alteraciones en los ecosistemas que pueden llevar a la extinción de diversas especies debido a cambios en su hábitat y condiciones de vida.",
-    porcentaje: 5
+    porcentaje: 0
   },
   {
     pregunta: 'Cualc del clos siguilentes vivens sen lel mhar',
@@ -14,9 +14,9 @@ const preguntas = [
   },
   {
     pregunta: '¿Cual de las siguientes palabras tiene mas letras?',
-    opciones: ['Mitigacion', 'Millonario'],
-    respuestaCorrecta: 'Mitigacion',
-    explicacion: 'En mitigacion, repite la letra i tres veces, por lo que tiene 8, ademas , la mitigacion es lo que todas las personas tenemos que buscar para asi contrarestar al cambio climatico',
+    opciones: ['Mitigacion', 'Invernadero'],
+    respuestaCorrecta: 'Invernadero',
+    explicacion: 'Es invernadero, esta pregunta no tiene trampas, ademas , la mitigacion es lo que todas las personas tenemos que buscar para asi contrarestar al cambio climatico',
     porcentaje: 20
   },
   {
@@ -28,9 +28,9 @@ const preguntas = [
   },
   {
     pregunta: 'Cual de las siguientes palabras no encaja en la siguiente serie:',
-    opciones: ['Desolacion', 'Insolar', 'Consolador', 'Invernadero'],
+    opciones: ['Desolacion', 'Insolar', 'Soleado', 'Invernadero'],
     respuestaCorrecta: 'Invernadero',
-    explicacion: 'Invernadero es la unica palabra que no tiene sol dentro de la palabra (poner mas info del sol)',
+    explicacion: 'Invernadero es la unica palabra que no tiene sol dentro de la palabra',
     porcentaje: 40
   },
   {
@@ -43,7 +43,7 @@ const preguntas = [
   {
     pregunta: 'Complete la siguiente serie de numeros: 2020,2023,2027,2032, * , 2044,2051',
     respuestaCorrecta: '2038',
-    explicacion: 'Si no se para el cambio climatico para 2038 el mundo va a explotar',
+    explicacion: 'Si no se para el cambio climatico para 2038 el mundo va a colapsar',
     porcentaje: 60
   },
   {
