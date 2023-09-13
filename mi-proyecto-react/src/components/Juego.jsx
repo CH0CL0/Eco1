@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import '../App.css';
+import { Link } from "react-router-dom";
 import preguntas from '../preguntas/preguntas';
 
 const Juego = () => {
-  const history = useHistory(); // Create a history object
+ 
   const [preguntasRestantes, setPreguntasRestantes] = useState([...preguntas]);
   const [preguntaActual, setPreguntaActual] = useState(null);
   const [respuestaUsuario, setRespuestaUsuario] = useState("");
@@ -12,6 +12,11 @@ const Juego = () => {
   const [opcionesSeleccionadas, setOpcionesSeleccionadas] = useState([]);
   const [showModalCorrecto, setShowModalCorrecto] = useState(false);
   const [porcentajeAlcanzado, setPorcentajeAlcanzado] = useState(0);
+
+
+  const handleNextQuestionClick = () => {
+    seleccionarSiguientePregunta();
+  };
 
   const seleccionarSiguientePregunta = () => {
     const preguntasOrdenadas = [...preguntasRestantes].sort(
@@ -29,15 +34,6 @@ const Juego = () => {
       setPreguntasRestantes(preguntasOrdenadas);
       setShowModalCorrecto(false);
     }
-  };
-
-  const handleNextQuestionClick = () => {
-    seleccionarSiguientePregunta();
-  };
-
-  const handleBackToInicioClick = () => {
-    // Use history.push to navigate to the "Inicio" view
-    history.push("/inicio"); // Replace "/inicio" with the actual route for "Inicio"
   };
 
   useEffect(() => {
@@ -101,9 +97,9 @@ const Juego = () => {
   return (
     <div className="App">
       <header className="App-header">
-        {preguntaActual && (
-          <div>
-            <p>{preguntaActual.pregunta}</p>
+      {preguntaActual && ( // Check if preguntaActual exists
+  <div>
+    <p>{preguntaActual.pregunta}</p>
             {preguntaActual.opciones && preguntaActual.opciones.length > 0 ? (
               <div className="options">{preguntaActual.opciones.map((opcion, index) => (
                 <button
@@ -136,10 +132,10 @@ const Juego = () => {
           </div>
         )}
 
-        {showModalCorrecto && !respuestaCorrecta && (
+{showModalCorrecto && !respuestaCorrecta && (
           <div className="modal">
             <p>{showModalCorrecto}</p>
-            <button onClick={handleBackToInicioClick}>Volver al inicio</button>
+            <Link to="/">Volver al inicio</Link>
           </div>
         )}
       </header>
