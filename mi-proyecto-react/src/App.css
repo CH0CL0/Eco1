@@ -126,3 +126,21 @@ h1 {
 .start-button:hover {
   background-color: #45a049; /* Cambia el color de fondo cuando se coloca el cursor sobre el botón */
 }
+
+/* Estilo básico para el enlace de inicio */
+.link-inicio {
+  text-decoration: none; /* Elimina la subrayado predeterminado del enlace */
+  color: #007bff; /* Color del texto del enlace, puedes cambiarlo a tu elección */
+  font-weight: bold; /* Hace que el texto sea negrita */
+  transition: color 0.3s; /* Agrega una transición suave de color al enlace */
+}
+
+/* Cambia el color del enlace al pasar el cursor por encima */
+.link-inicio:hover {
+  color: #0056b3; /* Color alternativo cuando el cursor se coloca sobre el enlace */
+}
+
+/* Estilo opcional para resaltar el enlace cuando se hace clic */
+.link-inicio:active {
+  color: #003f80; /* Color cuando se hace clic en el enlace */
+}

@@ -19,6 +19,7 @@ const Juego = () => {
   };
 
   const seleccionarSiguientePregunta = () => {
+    console.log("el boton anda")
     const preguntasOrdenadas = [...preguntasRestantes].sort(
       (a, b) => Math.abs(a.porcentaje - preguntaActual?.porcentaje) - Math.abs(b.porcentaje - preguntaActual?.porcentaje)
     );
@@ -63,7 +64,7 @@ const Juego = () => {
         if (respuestasCorrectas) {
           setShowModalCorrecto(true);
         } else {
-          setShowModalCorrecto("Error. Has perdido el juego");
+          setShowModalCorrecto("Error. Has perdido el juego.");
         }
       } else {
         setRespuestaCorrecta(false);
@@ -76,9 +77,7 @@ const Juego = () => {
       if (respuestaCorrectaSeleccionada) {
         setShowModalCorrecto(true);
       } else {
-        // Handle incorrect answer here
-        // Set an error message
-        setShowModalCorrecto("Error. Has perdido el juego");
+        setShowModalCorrecto("Error. Has perdido el juego.");
       }
     }
   };
@@ -97,7 +96,7 @@ const Juego = () => {
   return (
     <div className="App">
       <header className="App-header">
-      {preguntaActual && ( // Check if preguntaActual exists
+      {preguntaActual && ( 
   <div>
     <p>{preguntaActual.pregunta}</p>
             {preguntaActual.opciones && preguntaActual.opciones.length > 0 ? (
@@ -135,7 +134,7 @@ const Juego = () => {
 {showModalCorrecto && !respuestaCorrecta && (
           <div className="modal">
             <p>{showModalCorrecto}</p>
-            <Link to="/">Volver al inicio</Link>
+            <Link className="link-inicio" to="/"> Volver al inicio</Link>
           </div>
         )}
       </header>
