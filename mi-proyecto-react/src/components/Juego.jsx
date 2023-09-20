@@ -2,16 +2,14 @@ import React, { useState, useEffect } from "react";
 import '../App.css';
 import { Link } from "react-router-dom";
 import preguntas from '../preguntas/preguntas';
-
+import {PreguntaActualContext} from '../../context/PreguntaActualContext'
 const Juego = () => {
- 
+  const {pregunta, setPregunta} = React.useContext(PreguntaActualContext)
   const [preguntasRestantes, setPreguntasRestantes] = useState([...preguntas]);
-  const [preguntaActual, setPreguntaActual] = useState(null);
   const [respuestaUsuario, setRespuestaUsuario] = useState("");
   const [respuestaCorrecta, setRespuestaCorrecta] = useState(false);
   const [opcionesSeleccionadas, setOpcionesSeleccionadas] = useState([]);
   const [showModalCorrecto, setShowModalCorrecto] = useState(false);
-  const [porcentajeAlcanzado, setPorcentajeAlcanzado] = useState(0);
 
 
   const handleNextQuestionClick = () => {
@@ -20,7 +18,7 @@ const Juego = () => {
 
   const seleccionarSiguientePregunta = () => {
     const preguntasOrdenadas = [...preguntasRestantes].sort(
-      (a, b) => Math.abs(a.porcentaje - preguntaActual?.porcentaje) - Math.abs(b.porcentaje - preguntaActual?.porcentaje)
+      (a, b) => Math.abs(a.porcentaje - pregunta?.porcentaje) - Math.abs(b.porcentaje - pregunta?.porcentaje)
     );
 
     console.log('Llega aunque incorrecta')
@@ -28,8 +26,7 @@ const Juego = () => {
     console.log(preguntasOrdenadas)
 
       console.log("siguiente pregunta")
-      // setPorcentajeAlcanzado(siguientePregunta.porcentaje);
-      setPreguntaActual(siguientePregunta);
+      setPregunta(siguientePregunta);
       setRespuestaUsuario("");
       setRespuestaCorrecta(false);
       setOpcionesSeleccionadas([]);
@@ -47,7 +44,7 @@ const Juego = () => {
 
 
   const checkAnswer = () => {
-    const { respuestaCorrecta, opciones } = preguntaActual;
+    const { respuestaCorrecta, opciones } = pregunta;
 
     if (opciones && opciones.length > 0) {
       const alMenosUnaOpcionSeleccionada = opcionesSeleccionadas.some(
@@ -98,11 +95,11 @@ const Juego = () => {
   return (
     <div className="App">
       <header className="App-header">
-        {preguntaActual ? (
+        {pregunta ? (
           <div>
-            <p>{preguntaActual.pregunta}</p>
-            {preguntaActual.opciones && preguntaActual.opciones.length > 0 ? (
-              <div className="options">{preguntaActual.opciones.map((opcion, index) => (
+            <p>{pregunta.pregunta}</p>
+            {pregunta.opciones && pregunta.opciones.length > 0 ? (
+              <div className="options">{pregunta.opciones.map((opcion, index) => (
                 <button
                   key={index}
                   className={`option ${opcionesSeleccionadas[index] === true ? "selected" : ""}`}
