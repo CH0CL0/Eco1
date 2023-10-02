@@ -1,0 +1,41 @@
+/* Explicacion.css */
+body {
+    background-color: #282c34; /* Cambia el color de fondo de la vista aquí */
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    min-height: 100vh; /* Mínimo 100% de la altura de la ventana */
+  }
+/* Estilos específicos para ExplicacionPregunta */
+.explicacion-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para el encabezado */
+  .explicacion-container h2 {
+    font-size: 28px;
+    margin-top: 0;
+    color: #3498db;
+    text-align: center;
+  }
+  
+  /* Estilos para el texto de la pregunta */
+  .explicacion-container .pregunta-text {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Estilos para el párrafo de la explicación */
+  .explicacion-container p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #555;
+  }
+  

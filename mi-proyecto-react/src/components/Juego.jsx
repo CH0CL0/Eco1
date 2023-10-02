@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../App.css';
 import { Link } from "react-router-dom";
 import preguntas from '../preguntas/preguntas';
-import {PreguntaActualContext} from '../../context/PreguntaActualContext'
+import {PreguntaActualContext} from '../context/PreguntaActualContext'
 const Juego = () => {
   const {pregunta, setPregunta} = React.useContext(PreguntaActualContext)
   const [preguntasRestantes, setPreguntasRestantes] = useState([...preguntas]);
@@ -145,7 +145,7 @@ const Juego = () => {
         {showModalCorrecto && !respuestaCorrecta && (
           <div className="modal">
             <p>{showModalCorrecto}</p>
-            <Link className="link-inicio" to="/">Volver al inicio</Link>
+            <Link className="link-inicio" to="/explicacion">Ver explicacion de la pregunta</Link>
           </div>
         )}
       </header>
