@@ -5,7 +5,7 @@ import preguntas from '../preguntas/preguntas';
 import {PreguntaActualContext} from '../context/PreguntaActualContext'
 const Juego = () => {
   const {pregunta, setPregunta} = React.useContext(PreguntaActualContext)
-  const [preguntasRestantes, setPreguntasRestantes] = useState([...preguntas]);
+  const [preguntasRestantes, setPreguntasRestantes] = useState(JSON.parse(localStorage.getItem("preguntarestantes")) || [...preguntas]);
   const [respuestaUsuario, setRespuestaUsuario] = useState("");
   const [respuestaCorrecta, setRespuestaCorrecta] = useState(false);
   const [opcionesSeleccionadas, setOpcionesSeleccionadas] = useState([]);
@@ -20,17 +20,15 @@ const Juego = () => {
     const preguntasOrdenadas = [...preguntasRestantes].sort(
       (a, b) => Math.abs(a.porcentaje - pregunta?.porcentaje) - Math.abs(b.porcentaje - pregunta?.porcentaje)
     );
-
-    console.log('Llega aunque incorrecta')
     const siguientePregunta = preguntasOrdenadas.shift();
-    console.log(preguntasOrdenadas)
-
       console.log("siguiente pregunta")
       setPregunta(siguientePregunta);
+      localStorage.setItem("pregunta", JSON.stringify(siguientePregunta));
       setRespuestaUsuario("");
       setRespuestaCorrecta(false);
       setOpcionesSeleccionadas([]);
       setPreguntasRestantes(preguntasOrdenadas);
+      localStorage.setItem("preguntarestantes", JSON.stringify(preguntasOrdenadas))
       setShowModalCorrecto(false);
       console.log(showModalCorrecto)
   };
